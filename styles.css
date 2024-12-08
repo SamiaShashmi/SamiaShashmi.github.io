@@ -608,7 +608,6 @@ h2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
-    max-width: 800px;
     margin-left: 2rem;
 }
 
