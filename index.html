@@ -4,14 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Samia Islam</title>
+    <script>
+        // Set theme before first paint to avoid a light-mode flash
+        try {
+            var t = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', t);
+        } catch (e) {}
+        // Show one section at a time (falls back to a single long page without JS)
+        document.documentElement.classList.add('js-tabs');
+    </script>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
+    <div class="scroll-progress"></div>
+    <canvas class="landscape" aria-hidden="true"></canvas>
+    <div class="doodles" aria-hidden="true">
+        <div class="helix helix-1"><svg viewBox="0 0 40 180"><path class="strand" d="M20.0 0 L24.9 3 L29.4 6 L32.9 9 L35.2 12 L36.0 15 L35.2 18 L32.9 21 L29.4 24 L24.9 27 L20.0 30 L15.1 33 L10.6 36 L7.1 39 L4.8 42 L4.0 45 L4.8 48 L7.1 51 L10.6 54 L15.1 57 L20.0 60 L24.9 63 L29.4 66 L32.9 69 L35.2 72 L36.0 75 L35.2 78 L32.9 81 L29.4 84 L24.9 87 L20.0 90 L15.1 93 L10.6 96 L7.1 99 L4.8 102 L4.0 105 L4.8 108 L7.1 111 L10.6 114 L15.1 117 L20.0 120 L24.9 123 L29.4 126 L32.9 129 L35.2 132 L36.0 135 L35.2 138 L32.9 141 L29.4 144 L24.9 147 L20.0 150 L15.1 153 L10.6 156 L7.1 159 L4.8 162 L4.0 165 L4.8 168 L7.1 171 L10.6 174 L15.1 177 L20.0 180"/><path class="strand strand-2" d="M20.0 0 L15.1 3 L10.6 6 L7.1 9 L4.8 12 L4.0 15 L4.8 18 L7.1 21 L10.6 24 L15.1 27 L20.0 30 L24.9 33 L29.4 36 L32.9 39 L35.2 42 L36.0 45 L35.2 48 L32.9 51 L29.4 54 L24.9 57 L20.0 60 L15.1 63 L10.6 66 L7.1 69 L4.8 72 L4.0 75 L4.8 78 L7.1 81 L10.6 84 L15.1 87 L20.0 90 L24.9 93 L29.4 96 L32.9 99 L35.2 102 L36.0 105 L35.2 108 L32.9 111 L29.4 114 L24.9 117 L20.0 120 L15.1 123 L10.6 126 L7.1 129 L4.8 132 L4.0 135 L4.8 138 L7.1 141 L10.6 144 L15.1 147 L20.0 150 L24.9 153 L29.4 156 L32.9 159 L35.2 162 L36.0 165 L35.2 168 L32.9 171 L29.4 174 L24.9 177 L20.0 180"/><path class="rungs" d="M29.4 6 L10.6 6 M35.2 12 L4.8 12 M35.2 18 L4.8 18 M29.4 24 L10.6 24 M10.6 36 L29.4 36 M4.8 42 L35.2 42 M4.8 48 L35.2 48 M10.6 54 L29.4 54 M29.4 66 L10.6 66 M35.2 72 L4.8 72 M35.2 78 L4.8 78 M29.4 84 L10.6 84 M10.6 96 L29.4 96 M4.8 102 L35.2 102 M4.8 108 L35.2 108 M10.6 114 L29.4 114 M29.4 126 L10.6 126 M35.2 132 L4.8 132 M35.2 138 L4.8 138 M29.4 144 L10.6 144 M10.6 156 L29.4 156 M4.8 162 L35.2 162 M4.8 168 L35.2 168 M10.6 174 L29.4 174"/></svg></div>
+        <div class="helix helix-2"><svg viewBox="0 0 40 180"><path class="strand" d="M20.0 0 L24.9 3 L29.4 6 L32.9 9 L35.2 12 L36.0 15 L35.2 18 L32.9 21 L29.4 24 L24.9 27 L20.0 30 L15.1 33 L10.6 36 L7.1 39 L4.8 42 L4.0 45 L4.8 48 L7.1 51 L10.6 54 L15.1 57 L20.0 60 L24.9 63 L29.4 66 L32.9 69 L35.2 72 L36.0 75 L35.2 78 L32.9 81 L29.4 84 L24.9 87 L20.0 90 L15.1 93 L10.6 96 L7.1 99 L4.8 102 L4.0 105 L4.8 108 L7.1 111 L10.6 114 L15.1 117 L20.0 120 L24.9 123 L29.4 126 L32.9 129 L35.2 132 L36.0 135 L35.2 138 L32.9 141 L29.4 144 L24.9 147 L20.0 150 L15.1 153 L10.6 156 L7.1 159 L4.8 162 L4.0 165 L4.8 168 L7.1 171 L10.6 174 L15.1 177 L20.0 180"/><path class="strand strand-2" d="M20.0 0 L15.1 3 L10.6 6 L7.1 9 L4.8 12 L4.0 15 L4.8 18 L7.1 21 L10.6 24 L15.1 27 L20.0 30 L24.9 33 L29.4 36 L32.9 39 L35.2 42 L36.0 45 L35.2 48 L32.9 51 L29.4 54 L24.9 57 L20.0 60 L15.1 63 L10.6 66 L7.1 69 L4.8 72 L4.0 75 L4.8 78 L7.1 81 L10.6 84 L15.1 87 L20.0 90 L24.9 93 L29.4 96 L32.9 99 L35.2 102 L36.0 105 L35.2 108 L32.9 111 L29.4 114 L24.9 117 L20.0 120 L15.1 123 L10.6 126 L7.1 129 L4.8 132 L4.0 135 L4.8 138 L7.1 141 L10.6 144 L15.1 147 L20.0 150 L24.9 153 L29.4 156 L32.9 159 L35.2 162 L36.0 165 L35.2 168 L32.9 171 L29.4 174 L24.9 177 L20.0 180"/><path class="rungs" d="M29.4 6 L10.6 6 M35.2 12 L4.8 12 M35.2 18 L4.8 18 M29.4 24 L10.6 24 M10.6 36 L29.4 36 M4.8 42 L35.2 42 M4.8 48 L35.2 48 M10.6 54 L29.4 54 M29.4 66 L10.6 66 M35.2 72 L4.8 72 M35.2 78 L4.8 78 M29.4 84 L10.6 84 M10.6 96 L29.4 96 M4.8 102 L35.2 102 M4.8 108 L35.2 108 M10.6 114 L29.4 114 M29.4 126 L10.6 126 M35.2 132 L4.8 132 M35.2 138 L4.8 138 M29.4 144 L10.6 144 M10.6 156 L29.4 156 M4.8 162 L35.2 162 M4.8 168 L35.2 168 M10.6 174 L29.4 174"/></svg></div>
+        <div class="helix helix-3"><svg viewBox="0 0 40 180"><path class="strand" d="M20.0 0 L24.9 3 L29.4 6 L32.9 9 L35.2 12 L36.0 15 L35.2 18 L32.9 21 L29.4 24 L24.9 27 L20.0 30 L15.1 33 L10.6 36 L7.1 39 L4.8 42 L4.0 45 L4.8 48 L7.1 51 L10.6 54 L15.1 57 L20.0 60 L24.9 63 L29.4 66 L32.9 69 L35.2 72 L36.0 75 L35.2 78 L32.9 81 L29.4 84 L24.9 87 L20.0 90 L15.1 93 L10.6 96 L7.1 99 L4.8 102 L4.0 105 L4.8 108 L7.1 111 L10.6 114 L15.1 117 L20.0 120 L24.9 123 L29.4 126 L32.9 129 L35.2 132 L36.0 135 L35.2 138 L32.9 141 L29.4 144 L24.9 147 L20.0 150 L15.1 153 L10.6 156 L7.1 159 L4.8 162 L4.0 165 L4.8 168 L7.1 171 L10.6 174 L15.1 177 L20.0 180"/><path class="strand strand-2" d="M20.0 0 L15.1 3 L10.6 6 L7.1 9 L4.8 12 L4.0 15 L4.8 18 L7.1 21 L10.6 24 L15.1 27 L20.0 30 L24.9 33 L29.4 36 L32.9 39 L35.2 42 L36.0 45 L35.2 48 L32.9 51 L29.4 54 L24.9 57 L20.0 60 L15.1 63 L10.6 66 L7.1 69 L4.8 72 L4.0 75 L4.8 78 L7.1 81 L10.6 84 L15.1 87 L20.0 90 L24.9 93 L29.4 96 L32.9 99 L35.2 102 L36.0 105 L35.2 108 L32.9 111 L29.4 114 L24.9 117 L20.0 120 L15.1 123 L10.6 126 L7.1 129 L4.8 132 L4.0 135 L4.8 138 L7.1 141 L10.6 144 L15.1 147 L20.0 150 L24.9 153 L29.4 156 L32.9 159 L35.2 162 L36.0 165 L35.2 168 L32.9 171 L29.4 174 L24.9 177 L20.0 180"/><path class="rungs" d="M29.4 6 L10.6 6 M35.2 12 L4.8 12 M35.2 18 L4.8 18 M29.4 24 L10.6 24 M10.6 36 L29.4 36 M4.8 42 L35.2 42 M4.8 48 L35.2 48 M10.6 54 L29.4 54 M29.4 66 L10.6 66 M35.2 72 L4.8 72 M35.2 78 L4.8 78 M29.4 84 L10.6 84 M10.6 96 L29.4 96 M4.8 102 L35.2 102 M4.8 108 L35.2 108 M10.6 114 L29.4 114 M29.4 126 L10.6 126 M35.2 132 L4.8 132 M35.2 138 L4.8 138 M29.4 144 L10.6 144 M10.6 156 L29.4 156 M4.8 162 L35.2 162 M4.8 168 L35.2 168 M10.6 174 L29.4 174"/></svg></div>
+        <svg class="doodle d-spiral" viewBox="0 0 100 100"><path d="M52 50 L53 51 L53 52 L53 53 L52 54 L51 56 L49 56 L47 57 L45 56 L43 55 L41 53 L40 51 L40 48 L40 45 L41 42 L43 39 L46 37 L50 36 L54 36 L58 37 L62 39 L65 42 L68 47 L68 52 L68 57 L66 62 L63 66 L58 70 L52 72 L46 73 L40 71 L34 68 L29 63 L25 57 L24 50 L24 43 L26 36 L30 29 L37 24 L44 21 L52 19 L61 20 L69 24 L76 30 L81 37 L84 46 L85 56 L82 65 L77 74 L70 81 L61 86 L51 89 L40 88 L29 84 L20 78 L13 69 L9 59 L7 47 L9 35 L14 24"/></svg>
+        <svg class="doodle d-cell" viewBox="0 0 100 100"><path d="M50 12 C75 10 90 30 88 52 C86 76 66 90 46 88 C24 86 10 68 12 46 C14 26 30 13 50 12Z"/><circle cx="52" cy="48" r="12"/><circle cx="30" cy="66" r="3"/><circle cx="70" cy="70" r="2.5"/><circle cx="34" cy="32" r="2"/></svg>
+        <svg class="doodle d-star" viewBox="0 0 100 100"><path d="M50 10 Q54 46 90 50 Q54 54 50 90 Q46 54 10 50 Q46 46 50 10Z"/></svg>
+        <svg class="doodle d-attractor" viewBox="0 0 100 100"><path d="M50 50 C30 18 4 28 8 50 C12 74 34 74 50 50 C66 26 88 26 92 50 C96 72 70 82 50 50Z"/><path d="M50 50 C36 30 18 34 20 50 C22 64 38 62 50 50 C62 38 78 38 80 50 C82 62 64 66 50 50"/></svg>
+        <svg class="doodle d-leaf" viewBox="0 0 100 100"><path d="M18 82 C18 42 48 16 84 16 C84 52 58 82 18 82Z"/><path d="M18 82 L64 36"/></svg>
+        <svg class="doodle d-heart" viewBox="0 0 100 100"><path d="M50 82 C20 60 10 40 25 28 C37 18 48 26 50 36 C52 26 63 18 75 28 C90 40 80 60 50 82Z"/></svg>
+        <svg class="doodle d-plane" viewBox="0 0 100 100"><path d="M10 50 L90 15 L60 85 L46 58 Z"/><path d="M46 58 L90 15"/></svg>
+        <svg class="doodle d-star2" viewBox="0 0 100 100"><path d="M50 10 Q54 46 90 50 Q54 54 50 90 Q46 54 10 50 Q46 46 50 10Z"/></svg>
+    </div>
     <header>
         <nav class="navbar">
             <div class="logo">Samia Islam</div>
+            <button class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button>
             <div class="hamburger">
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -20,6 +47,8 @@
             <ul class="nav-menu">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#publications">Publications</a></li>
+                <li><a href="#posters">Posters</a></li>
+                <li><a href="#talks">Talks</a></li>
                 <li><a href="#teaching">Teaching</a></li>
                 <li><a href="#news">News</a></li>
                 <li><a href="#resume">Resume</a></li>
@@ -30,42 +59,43 @@
 
     <main>
         <section id="home" class="home">
+            <div class="blob blob-1"></div>
             <div class="home-content">
                 <div class="profile-image">
                     <img src="propic.png" alt="Samia Islam">
                     <div class="social-links">
-                        <a href="https://scholar.google.com/citations?user=1-J37fUAAAAJ" class="social-link" target="_blank" rel="noopener noreferrer"><i class="icon-scholar"></i><span>Google Scholar</span></a>
+                        <a href="https://scholar.google.com/citations?user=1-J37fUAAAAJ" class="social-link" target="_blank" rel="noopener noreferrer"><svg class="icon-scholar" viewBox="0 0 512 512" aria-hidden="true"><path fill="currentColor" d="M390.9 298.5c0 0 0 .1 .1 .1c9.2 19.4 14.4 41.1 14.4 64C405.3 445.1 338.5 512 256 512s-149.3-66.9-149.3-149.3c0-22.9 5.2-44.6 14.4-64h0c1.7-3.6 3.6-7.2 5.6-10.7c4.4-7.6 9.4-14.7 15-21.3c27.4-32.6 68.5-53.3 114.4-53.3c33.6 0 64.6 11.1 89.6 29.9c9.1 6.9 17.4 14.7 24.8 23.5c5.6 6.6 10.6 13.8 15 21.3c2 3.4 3.8 7 5.5 10.5zm26.4-18.8c-30.1-58.4-91-98.4-161.3-98.4s-131.2 40-161.3 98.4L0 202.7 256 0 512 202.7l-94.7 77.1z"/></svg><span>Google Scholar</span></a>
                         <a href="https://github.com/SamiaShashmi" class="social-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-github fa-lg"></i><span>GitHub</span></a>
                         <a href="https://www.linkedin.com/in/samia-islam37/" class="social-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin fa-lg"></i><span>LinkedIn</span></a>
                     </div>
                 </div>
                 <div class="bio">
-                    <!-- <h1>Samia Islam</h1>
+                    <p class="eyebrow">Hi there 👋, I'm</p>
+                    <h1>Samia Islam</h1>
                     <p class="title">PhD Student, Computer Science and Engineering</p>
-                    <p class="institution">Michigan State University</p> -->
-                    <p class="description">I am Samia Islam. I am a PhD student in the <a class="hyperlink" href="https://sbhattac.msu.domains/" target="_blank" rel="noopener noreferrer">Bhattacharya Lab</a> at Michigan State University under the supervision of Dr. <a class="hyperlink" href="https://sbhattac.msu.domains/" target="_blank" rel="noopener noreferrer">Sudin Bhattacharya</a> and Dr. <a class="hyperlink" href="https://zijunjkl.github.io/" target="_blank" rel="noopener noreferrer">Zijun Cui</a>. My research field is focused on Dynamical Systems in Single-Cell Genomics. My aim is to develop an algorithm to derive single-cell dynamical models.</p>
-                    <div class="education">
-                        <h3>Education</h3>
-                        <ul>
-                            <li>PhD (Ongoing), Department of Computer Science and Engineering, Michigan State University, East Lansing, MI</li>
-                            <li>BSc, Department of Computer Science and Engineering, Islamic University of Technology (IUT), Bangladesh</li>
-                        </ul>
-                    </div>
-                    <div class="education">
-                        <h3>Research Interests</h3>
-                        <ul>
-                            <li>Dynamical Systems</li>
-                            <li>Non-Linear Dynamics</li>
-                            <li>Single-Cell Analysis</li>
-                            <li>Deep Learning</li>
-                        </ul>
-                    </div>
+                    <p class="institution">Michigan State University</p>
+                    <p class="description">I am a Ph.D. student in the <a class="hyperlink" href="https://engineering.msu.edu/about/departments/cse" target="_blank" rel="noopener noreferrer">Department of Computer Science and Engineering</a> at <a class="hyperlink" href="https://msu.edu/" target="_blank" rel="noopener noreferrer">Michigan State University</a>, advised by <a class="hyperlink" href="https://sbhattac.msu.domains/" target="_blank" rel="noopener noreferrer">Dr. Sudin Bhattacharya</a> and co-advised by <a class="hyperlink" href="https://zijunjkl.github.io/" target="_blank" rel="noopener noreferrer">Dr. Zijun Cui</a>. My research explores dynamical systems approaches to understanding single-cell behavior, with a focus on characterizing cellular dynamics and the underlying processes that drive changes in cell states.</p>
+                </div>
+                <div class="education education-side">
+                    <h3>Education</h3>
+                    <ul>
+                        <li><i class="fas fa-graduation-cap"></i><div><strong>Ph.D., Computer Science and Engineering</strong><span>Michigan State University, East Lansing, MI · Ongoing</span></div></li>
+                        <li><i class="fas fa-graduation-cap"></i><div><strong>B.Sc., Computer Science and Engineering</strong><span>Islamic University of Technology (IUT), Bangladesh</span></div></li>
+                    </ul>
+                </div>
+                <div class="education interests-side">
+                    <h3>Research Interests</h3>
+                    <ul class="chips">
+                        <li><i class="fas fa-infinity"></i> Dynamical Systems Theory</li>
+                        <li><i class="fas fa-dna"></i> Single-Cell Transcriptomics</li>
+                        <li><i class="fas fa-brain"></i> Deep Learning</li>
+                    </ul>
                 </div>
             </div>
         </section>
 
         <section id="publications" class="publications">
-            <h2>Publications</h2>
+            <h2>Selected Publications</h2>
             <div class="publications-list">
                 <div class="publication">
                     <div class="pub-content">
@@ -106,6 +136,90 @@
             </div>
         </section>
 
+        <section id="posters" class="posters">
+            <h2>Posters</h2>
+            <div class="entry-list">
+                <div class="entry poster">
+                    <a class="poster-thumb" href="documents/poster_fyim.pdf" target="_blank" rel="noopener noreferrer">
+                        <img src="images/posters/poster_fyim.jpg" alt="Poster: From Snapshots to Dynamics: Discovering Gene Regulatory Equations from Single-Cell Data" loading="lazy">
+                    </a>
+                    <div class="poster-body">
+                        <span class="entry-date">August 6, 2026</span>
+                        <p class="entry-title">From Snapshots to Dynamics: Discovering Gene Regulatory Equations from Single-Cell Data</p>
+                        <p><b>Samia Islam</b>, Zijun Cui, Sudin Bhattacharya</p>
+                        <p class="entry-venue"><i class="fas fa-location-dot"></i> Finding Your Inner Modeler (FYIM 2026)</p>
+                        <div class="entry-links">
+                            <a class="hyperlink poster-link" href="documents/poster_fyim.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf"></i> View poster</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="entry poster">
+                    <a class="poster-thumb" href="documents/poster_ggsday.pdf" target="_blank" rel="noopener noreferrer">
+                        <img src="images/posters/poster_ggsday.jpg" alt="Poster: From Trajectory Reconstruction to Dynamic Gene Regulatory Models in Single Cells" loading="lazy">
+                    </a>
+                    <div class="poster-body">
+                        <span class="entry-date">May 5, 2026</span>
+                        <p class="entry-title">From Trajectory Reconstruction to Dynamic Gene Regulatory Models in Single Cells</p>
+                        <p><b>Samia Islam</b>, Zijun Cui, Sudin Bhattacharya</p>
+                        <p class="entry-venue"><i class="fas fa-location-dot"></i> GGS Day 2026, Genetics and Genome Sciences Program, Michigan State University</p>
+                        <div class="entry-links">
+                            <a class="hyperlink poster-link" href="documents/poster_ggsday.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf"></i> View poster</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="entry poster">
+                    <a class="poster-thumb" href="documents/poster_icibm.pdf" target="_blank" rel="noopener noreferrer">
+                        <img src="images/posters/poster_icibm.jpg" alt="Poster: Predicting Cellular Reprogramming Trajectories with Deep Generative Models: A Case Study with Epithelial–Mesenchymal Transition (EMT)" loading="lazy">
+                    </a>
+                    <div class="poster-body">
+                        <span class="entry-date">August 4, 2025</span>
+                        <p class="entry-title">Predicting Cellular Reprogramming Trajectories with Deep Generative Models: A Case Study with Epithelial–Mesenchymal Transition (EMT)</p>
+                        <p><b>Samia Islam</b>, Sudin Bhattacharya</p>
+                        <p class="entry-venue"><i class="fas fa-location-dot"></i> International Conference on Intelligent Biology and Medicine (ICIBM 2025), Ohio State University, Columbus, OH</p>
+                        <div class="entry-links">
+                            <a class="hyperlink poster-link" href="documents/poster_icibm.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf"></i> View poster</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="entry poster">
+                    <a class="poster-thumb" href="documents/poster_grad_symposium.pdf" target="_blank" rel="noopener noreferrer">
+                        <img src="images/posters/poster_grad_symposium.jpg" alt="Poster: Synthetic Cell Trajectories: Computational Modeling of Predicted Cell Transitions" loading="lazy">
+                    </a>
+                    <div class="poster-body">
+                        <span class="entry-date">May 8, 2025</span>
+                        <p class="entry-title">Synthetic Cell Trajectories: Computational Modeling of Predicted Cell Transitions</p>
+                        <p><b>Samia Islam</b>, Sudin Bhattacharya</p>
+                        <p class="entry-venue"><i class="fas fa-location-dot"></i> Engineering Graduate Research Symposium 2025, Michigan State University</p>
+                        <div class="entry-links">
+                            <a class="hyperlink poster-link" href="documents/poster_grad_symposium.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf"></i> View poster</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="talks" class="talks">
+            <h2>Talks</h2>
+            <div class="entry-list">
+                <!-- To add a talk, copy one of the cards below and update its details -->
+                <div class="entry poster">
+                    <a class="poster-thumb" href="documents/CSTMI_26_Samia.pdf" target="_blank" rel="noopener noreferrer">
+                        <img src="images/talks/talk_cstmi26.jpg" alt="Title slide: From Single-Cell Trajectories to Dynamic Gene Regulatory Models" loading="lazy">
+                    </a>
+                    <div class="poster-body">
+                        <span class="entry-date">May 2026</span>
+                        <p class="entry-title">From Single-Cell Trajectories to Dynamic Gene Regulatory Models</p>
+                        <p><b>Samia Islam</b></p>
+                        <p class="entry-venue"><i class="fas fa-location-dot"></i> CSTMI Workshop, Michigan State University</p>
+                        <div class="entry-links">
+                            <a class="hyperlink poster-link" href="documents/CSTMI_26_Samia.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf"></i> View slides</a>
+                            <a class="hyperlink poster-link" href="https://iit.msu.edu/news/2026-5-12-SRC-hosts-workshop.html" target="_blank" rel="noopener noreferrer"><i class="fas fa-newspaper"></i> Read the news story</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="teaching" class="teaching">
             <h2>Teaching</h2>
             <div class="teaching-list">
@@ -136,77 +250,111 @@
             <h2>News</h2>
             <div class="news-list">
                 <div class="news-item">
-                    <div class="news-content">
+                    <div class="news-content has-image">
+                        <div class="news-image"><img src="images/fyim26.png" alt="Samia Islam presenting her poster at FYIM 2026" loading="lazy"></div>
+                        <div class="news-text">
+                            <p class="news-title">Attended FYIM 2026</p>
+                            <p>I attended the <a class="hyperlink" href="https://sites.research.uci.edu/fyim/" target="_blank" rel="noopener noreferrer">Finding Your Inner Modeler Conference (FYIM 2026)</a>, where I presented my poster "From Snapshots to Dynamics: Discovering Gene Regulatory Equations from Single-Cell Data". <a class="hyperlink" href="documents/poster_fyim.pdf" target="_blank" rel="noopener noreferrer">View the poster</a>.</p>
+                            <p class="news-date">August 6, 2026</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="news-item">
+                    <div class="news-content has-image">
+                        <div class="news-image"><img src="images/cstmi.png" alt="Samia Islam giving her talk at the CSTMI Workshop" loading="lazy"></div>
+                        <div class="news-text">
+                            <p class="news-title">Gave a Talk at the CSTMI Workshop</p>
+                            <p>I gave a talk titled "From Single-Cell Trajectories to Dynamic Gene Regulatory Models" at the CSTMI Workshop at Michigan State University. <a class="hyperlink" href="documents/CSTMI_26_Samia.pdf" target="_blank" rel="noopener noreferrer">View the slides</a> or <a class="hyperlink" href="https://iit.msu.edu/news/2026-5-12-SRC-hosts-workshop.html" target="_blank" rel="noopener noreferrer">read the news story</a>.</p>
+                            <p class="news-date">May 2026</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="news-item">
+                    <div class="news-content has-image">
+                        <div class="news-image news-image-portrait"><img src="images/ggs.png" alt="Samia Islam presenting her poster at GGS Day 2026" loading="lazy"></div>
+                        <div class="news-text">
+                            <p class="news-title">Presented Poster at GGS Day 2026</p>
+                            <p>I presented my poster "From Trajectory Reconstruction to Dynamic Gene Regulatory Models in Single Cells" at <a class="hyperlink" href="https://www.linkedin.com/posts/ggsday2026-genetics-genomesciences-ugcPost-7459630168723312640-dclG/" target="_blank" rel="noopener noreferrer">GGS Day 2026</a>, hosted by the Genetics and Genome Sciences Program at Michigan State University. <a class="hyperlink" href="documents/poster_ggsday.pdf" target="_blank" rel="noopener noreferrer">View the poster</a>.</p>
+                            <p class="news-date">May 5, 2026</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="news-item">
+                    <div class="news-content has-image">
+                        <div class="news-image"><img src="images/fyim.png" alt="Group photo of FYIM 2025 attendees" loading="lazy"></div>
                         <div class="news-text">
                             <p class="news-title">Attended FYIM 2025</p>
-                            <p>I attended the Finding Your Inner Modeler Conference (FYIM 2025) at the University of California, Irvine.</p>
+                            <p>I attended the <a class="hyperlink" href="https://sites.research.uci.edu/fyim/finding-your-inner-modeler/2025-overview/" target="_blank" rel="noopener noreferrer">Finding Your Inner Modeler Conference (FYIM 2025)</a> at the University of California, Irvine.</p>
                             <p class="news-date">August 7-8, 2025</p>
                         </div>
                     </div>
                 </div>
                 <div class="news-item">
-                    <div class="news-content">
+                    <div class="news-content has-image">
+                        <div class="news-image"><img src="images/icibm.png" alt="Samia Islam presenting her poster at ICIBM 2025" loading="lazy"></div>
                         <div class="news-text">
                             <p class="news-title">Presented Poster at ICIBM 2025</p>
-                            <p>I presented my work as a poster titled "Predicting Cellular Reprogramming Trajectories with Deep Generative Models: A Case Study with Epithelial–Mesenchymal Transition (EMT)" at the International Conference on Intelligent Biology and Medicine (ICIBM 2025), Ohio State University, Columbus, OH.</p>
+                            <p>I presented my work as a poster titled "Predicting Cellular Reprogramming Trajectories with Deep Generative Models: A Case Study with Epithelial–Mesenchymal Transition (EMT)" at the <a class="hyperlink" href="https://icibm2025.iaibm.org/" target="_blank" rel="noopener noreferrer">International Conference on Intelligent Biology and Medicine (ICIBM 2025)</a>, Ohio State University, Columbus, OH. <a class="hyperlink" href="documents/poster_icibm.pdf" target="_blank" rel="noopener noreferrer">View the poster</a>.</p>
                             <p class="news-date">August 3-5, 2025</p>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="news-list">
                 <div class="news-item">
-                    <div class="news-content">
+                    <div class="news-content has-image">
+                        <div class="news-image news-image-diagram"><a href="https://www.nature.com/articles/s41540-025-00565-3" target="_blank" rel="noopener noreferrer"><img src="images/dst.png" alt="Preview of the npj Systems Biology and Applications paper" loading="lazy"></a></div>
                         <div class="news-text">
-                            <p class="news-title">One Paper Got Published at npj Systems Biology and Applications Journal </p>
-                            <p>One of my perspective paper got published in npj Systems Biology and Applications Journal by Nature portfolio.</p>
+                            <p class="news-title">One Paper Got Published at npj Systems Biology and Applications Journal</p>
+                            <p>My perspective paper, "<a class="hyperlink" href="https://www.nature.com/articles/s41540-025-00565-3" target="_blank" rel="noopener noreferrer">Dynamical systems theory as an organizing principle for single-cell biology</a>", got published in npj Systems Biology and Applications by Nature Portfolio.</p>
                             <p class="news-date">August 1, 2025</p>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="news-list">
                 <div class="news-item">
-                    <div class="news-content">
+                    <div class="news-content has-image">
+                        <div class="news-image news-image-diagram"><a href="documents/qual.pdf" target="_blank" rel="noopener noreferrer"><img src="images/news/qual.jpg" alt="Title slide: Physics-informed Machine Learning for Dynamical Systems" loading="lazy"></a></div>
                         <div class="news-text">
                             <p class="news-title">Passed PhD Qualifier Examination</p>
-                            <p>I passed the PhD Qualifier Examination under the committee composed by Dr. Kevin Liu, Dr. Wolfgang Banzhaf, and Dr. Hae-Na Lee. My examination topic was "Physics-informed Machine Learning (PiML) in Dynamical Systems".</p>
+                            <p>I passed the PhD Qualifier Examination under the committee composed by Dr. Kevin Liu, Dr. Wolfgang Banzhaf, and Dr. Hae-Na Lee. My examination topic was "Physics-informed Machine Learning (PiML) in Dynamical Systems". <a class="hyperlink" href="documents/qual.pdf" target="_blank" rel="noopener noreferrer">View the slides</a>.</p>
                             <p class="news-date">February 10, 2025</p>
                         </div>
                     </div>
                 </div>
                 <div class="news-item">
-                    <div class="news-content">
+                    <div class="news-content has-image">
+                        <div class="news-image"><img src="images/bl.png" alt="Samia Islam with members of the Bhattacharya Lab" loading="lazy"></div>
                         <div class="news-text">
                             <p class="news-title">Joined Bhattacharya Lab</p>
-                            <p>I joined the Bhattacharya Lab at Michigan State University as a PhD student. I will be working under Dr. Sudin Bhattacharya on Dynamical Systems in Single-Cell Genomics.</p>
+                            <p>I joined the <a class="hyperlink" href="https://sbhattac.msu.domains/" target="_blank" rel="noopener noreferrer">Bhattacharya Lab</a> at Michigan State University as a PhD student. I will be working under Dr. Sudin Bhattacharya on Dynamical Systems in Single-Cell Genomics.</p>
                             <p class="news-date">August 26, 2024</p>
                         </div>
                     </div>
                 </div>
                 <div class="news-item">
-                    <div class="news-content">
+                    <div class="news-content has-image">
+                        <div class="news-image"><img src="images/crawp.png" alt="Samia Islam at the CRA-WP Grad Cohort for Women 2024" loading="lazy"></div>
                         <div class="news-text">
                             <p class="news-title">Attended CRA-WP Grad Cohort for Women 2024</p>
-                            <p>I had the incredible opportunity to attend the CRA-WP Grad Cohort for Women in Minneapolis, Minnesota. It was an amazing experience where I connected with experienced female researchers and professionals in computing and academia.</p>
+                            <p>I had the incredible opportunity to attend the <a class="hyperlink" href="https://cra.org/cra-wp/grad-cohort-for-women/" target="_blank" rel="noopener noreferrer">CRA-WP Grad Cohort for Women</a> in Minneapolis, Minnesota. It was an amazing experience where I connected with experienced female researchers and professionals in computing and academia.</p>
                             <p class="news-date">April 12-13, 2024</p>
                         </div>
                     </div>
                 </div>
                 <div class="news-item">
-                    <div class="news-content">
+                    <div class="news-content has-image">
+                        <div class="news-image news-image-diagram"><a href="https://dl.acm.org/doi/abs/10.1145/3652037.3652067" target="_blank" rel="noopener noreferrer"><img src="images/wrinkle.png" alt="Preview of the PETRA 2024 wrinkle detection paper" loading="lazy"></a></div>
                         <div class="news-text">
                             <p class="news-title">Two Papers Accepted at PETRA 2024</p>
-                            <p>Our papers on "Wrinkle Detection and Cloth Flattening" and "UML Class Diagrams with Audio" have been accepted at PETRA 2024! I am the first author of the paper titled "Wrinkle Detection and Cloth Flattening through Deep Learning and Image Analysis as Assistive Technologies for Sewing".</p>
+                            <p>Our papers on "Wrinkle Detection and Cloth Flattening" and "UML Class Diagrams with Audio" have been accepted at PETRA 2024! I am the first author of the paper titled "<a class="hyperlink" href="https://dl.acm.org/doi/abs/10.1145/3652037.3652067" target="_blank" rel="noopener noreferrer">Wrinkle Detection and Cloth Flattening through Deep Learning and Image Analysis as Assistive Technologies for Sewing</a>".</p>
                             <p class="news-date">March 1, 2024</p>
                         </div>
                     </div>
                 </div>
                 <div class="news-item">
-                    <div class="news-content">
+                    <div class="news-content has-image">
+                        <div class="news-image"><img src="images/msu.png" alt="Michigan State University entrance sign" loading="lazy"></div>
                         <div class="news-text">
                             <p class="news-title">Started PhD at Michigan State University</p>
-                            <p>I joined the Computer Science & Engineering department at Michigan State University as a PhD student. I will be serving as a Teaching Assistant as well.</p>
+                            <p>I joined the <a class="hyperlink" href="https://engineering.msu.edu/departments/cse" target="_blank" rel="noopener noreferrer">Computer Science &amp; Engineering department</a> at Michigan State University as a PhD student. I will be serving as a Teaching Assistant as well.</p>
                             <p class="news-date">August 15, 2023</p>
                         </div>
                     </div>
@@ -216,7 +364,16 @@
 
         <section id="resume" class="resume">
             <h2>Resume</h2>
-            <p>My resume can be found <a href="Resume_Samia.pdf" class="hyperlink" target="_blank" rel="noopener noreferrer">here</a>.</p>
+            <div class="resume-viewer">
+                <div class="resume-toolbar">
+                    <span><i class="fas fa-file-pdf"></i> Resume_Samia.pdf</span>
+                    <div>
+                        <a href="Resume_Samia.pdf" class="btn btn-ghost" target="_blank" rel="noopener noreferrer"><i class="fas fa-up-right-from-square"></i> Open</a>
+                        <a href="Resume_Samia.pdf" class="btn" download><i class="fas fa-download"></i> Download</a>
+                    </div>
+                </div>
+                <iframe src="Resume_Samia.pdf#view=FitH" title="Samia Islam's resume" loading="lazy"></iframe>
+            </div>
             <!-- <div class="resume-container">
                 <div class="download-button">
                     <a href="Resume_Samia.pdf" download class="download-link">
@@ -230,16 +387,24 @@
             <h2>Contact</h2>
             <div class="contact-content">
                 <div class="contact-info">
-                    <p><strong>Email:</strong> <a href="mailto:islamsa3@msu.edu" class="hyperlink" target="_blank" rel="noopener noreferrer">islamsa3@msu.edu</a></p>
-                    <p><strong>Office:</strong> Room 1300, IQ Building, 775 Woodlot Dr East Lansing MI 48824</p>
+                    <div class="contact-row">
+                        <i class="fas fa-envelope"></i>
+                        <div><small>Email</small><a href="mailto:islamsa3@msu.edu" class="hyperlink">islamsa3@msu.edu</a></div>
+                    </div>
+                    <div class="contact-row">
+                        <i class="fas fa-location-dot"></i>
+                        <div><small>Office</small><span>Room 1300, IQ Building, 775 Woodlot Dr East Lansing MI 48824</span></div>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2024 Samia Islam. All rights reserved.</p>
+        <p>&copy; <span id="year">2024</span> Samia Islam. All rights reserved.</p>
     </footer>
+
+    <button class="back-to-top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
 
     <script src="script.js"></script>
 
