@@ -622,6 +622,15 @@ main > section.in-view > h2::after {
 /* ==========================================================================
    Publications
    ========================================================================== */
+.scholar-cta {
+    margin: 0 0 1.75rem;
+}
+
+.scholar-cta .icon-scholar {
+    width: 18px;
+    height: 18px;
+}
+
 .publications-list {
     display: grid;
     gap: 1.5rem;
@@ -1260,6 +1269,24 @@ main > section > h2,
 @keyframes doodle-twinkle {
     0%, 100% { transform: scale(0.8) rotate(0deg); }
     50% { transform: scale(1.15) rotate(20deg); }
+}
+
+/* Hover: doodles and helices near the cursor grow, brighten and drift away (see script.js) */
+.doodle,
+.helix {
+    translate: var(--dx, 0) var(--dy, 0);
+    transition: translate 0.6s var(--bounce), scale 0.5s var(--bounce), opacity 0.4s ease, stroke 0.4s ease;
+}
+
+.doodle.poked {
+    scale: 1.3;
+    stroke: var(--accent-2);
+    opacity: calc(var(--doodle-opacity) * 3);
+}
+
+.helix.poked {
+    scale: 1.2;
+    opacity: calc(var(--doodle-opacity) * 3.5);
 }
 
 /* Waddington landscape canvas (drawn by script.js), tucked into the bottom-right corner */
